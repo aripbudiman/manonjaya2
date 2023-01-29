@@ -7,6 +7,7 @@ use App\Models\AlatTulisKantor;
 use App\Models\BarangHilang;
 use App\Models\BarangKeluar;
 use App\Models\BarangMasuk;
+use App\Models\Petugas;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,8 +20,8 @@ class AtkController extends Controller
      */
     public function index()
     {
-        $items =AlatTulisKantor::with(['barangmasuk'])->withCount(['barangmasuk','qty'])->get();
-        return $items;
+        $items =AlatTulisKantor::with(['barangmasuk'])->withCount('barangmasuk')->get();
+        // return $items;
         return view('atk.index',['title'=>'Alat Tulis Kantor'],compact('items'));
     }
 
@@ -149,7 +150,8 @@ class AtkController extends Controller
 
     public function createBarangKeluar(){
         $items =AlatTulisKantor::all();
-        return view('atk.createbarangkeluar',['title'=>'Create Barang Keluar'],compact('items'));
+        $petugas =Petugas::where('status','!=','non aktif')->get();
+        return view('atk.createbarangkeluar',['title'=>'Create Barang Keluar'],compact('items','petugas'));
     }
 
     public function storeBarangKeluar(Request $request){
@@ -157,11 +159,13 @@ class AtkController extends Controller
         $newdate=str_replace('/','-',$date);
         
         $item_id=$request->item_id;
+        $petugas=$request->petugas;
         $qty=$request->qty;
         for($i=0; $i<count($item_id);$i++){
             $data = [
                 'trx_date'=>$newdate,
                 'item_id'=>$item_id[$i],
+                'petugas'=>$petugas[$i],
                 'qty'=>$qty[$i]
             ];
             BarangKeluar::create($data);

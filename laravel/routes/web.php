@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AtkController;
+use App\Http\Controllers\MajelisController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WakalahController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +47,11 @@ Route::middleware('auth')->group(function () {
     Route::get('baranghilang/create',[AtkController::class,'createBarangHilang'])->name('baranghilang.create');
     Route::post('baranghilang/store',[AtkController::class,'storeBarangHilang'])->name('baranghilang.store');
     Route::delete('baranghilang/{barangHilang}',[AtkController::class,'destroyBarangHilang'])->name('baranghilang.destroy');
+
+    Route::resource('wakalah',WakalahController::class);
+    Route::resource('petugas',PetugasController::class);
+    Route::resource('majelis',MajelisController::class);
+    Route::PUT('petugas/status/{status}/id/{id}',[PetugasController::class,'update_status'])->name('petugas.update_status');
 });
 
 require __DIR__.'/auth.php';

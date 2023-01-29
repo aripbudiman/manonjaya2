@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('barang_keluar', function (Blueprint $table) {
+        Schema::create('wakalah', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('item_id');
-            $table->integer('qty');
-            $table->date('trx_date');
+            $table->string('petugas');
+            $table->string('nama_anggota');
+            $table->string('majelis');
+            $table->decimal('nominal',15,0);
+            $table->enum('status',['OnProses','Approve','Reject'])->default('OnProses');
+            $table->date('trx_wkl');
+            $table->date('trx_mba')->nullable();
             $table->timestamps();
-            $table->foreign('item_id')->references('id')->on('atk');
         });
     }
 
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang_keluar');
+        Schema::dropIfExists('wakalah');
     }
 };

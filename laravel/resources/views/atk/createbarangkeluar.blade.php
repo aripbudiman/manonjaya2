@@ -24,6 +24,9 @@
                 <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr class="text-center">
                         <th scope="col" class="px-6 py-3">
+                            Petugas
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Item name
                         </th>
                         <th scope="col" class="px-6 py-3 w-40">
@@ -37,6 +40,14 @@
                 <tbody id="input">
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4">
+                            <select id="petugas" name="petugas[]"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @foreach ($petugas as $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
                         <td class="px-6 py-4">
                             <select id="item_id" name="item_id[]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -80,6 +91,14 @@
             let tr = `<tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
+                            <select id="petugas" name="petugas[]"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @foreach ($petugas as $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td class="px-6 py-4">
                             <select id="item_id" name="item_id[]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach ($items as $item)
@@ -89,7 +108,8 @@
                         </td>
                         <td class="px-6 py-4">
                             <input type="text" id="qty" name="qty[]"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                class="bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <button type="button"
