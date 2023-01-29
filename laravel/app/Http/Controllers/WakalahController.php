@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Majelis;
 use Illuminate\Http\Request;
+use App\Models\Petugas;
 
 class WakalahController extends Controller
 {
@@ -23,7 +25,9 @@ class WakalahController extends Controller
      */
     public function create()
     {
-        return view('wakalah.create',['title'=>'Create Wakalah']);
+        $petugas =Petugas::where('status','!=','non aktif')->get();
+        $majelis=Majelis::all();
+        return view('wakalah.create',['title'=>'Create Wakalah'],compact('petugas','majelis'));
     }
 
     /**
