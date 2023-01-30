@@ -55,7 +55,7 @@
                         {{ $item->satuan }}
                     </td>
                     <td class="px-6 py-4">
-                        Laptop
+                        {{ $item->stok }}
                     </td>
                     <td class="px-6 py-4">
                         <button onclick="edit(`{{$item->item_name}}`,`{{ $item->satuan }}`,`{{ $item->id }}`)"

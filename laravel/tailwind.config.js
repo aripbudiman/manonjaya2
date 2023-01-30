@@ -13,6 +13,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                love:['Love Ya Like A Sister', ...defaultTheme.fontFamily.sans]
             },
         },
     },

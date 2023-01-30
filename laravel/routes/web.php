@@ -4,8 +4,10 @@ use App\Http\Controllers\AtkController;
 use App\Http\Controllers\MajelisController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TitipanController;
 use App\Http\Controllers\WakalahController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome',['title'=>'Manonjaya.app']);
+    $wakalah =DB::table('wakalah')->selectRaw('sum(nominal) as nominal')->where('status','OnProses')->get();
+    $titipan=DB::table('titipan')->selectRaw('sum(kredit) as nominal')->where('status','not_taken')->get();
+    $titipans=DB::table('titipan')->selectRaw('sum(kredit) as nominal, petugas')->where('status','not_taken')->groupBy('petugas')->get();
+    $listwkl=DB::table('wakalah')->selectRaw('sum(nominal) as nominal, petugas')->where('status','OnProses')->groupBy('petugas')->get();
+    // return$listwkl;
+
+    return view('welcome',['title'=>'Manonjaya.app'],compact('wakalah','titipan','titipans','listwkl'));
 });
 
 Route::get('/dashboard', function () {
@@ -52,6 +60,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('petugas',PetugasController::class);
     Route::resource('majelis',MajelisController::class);
     Route::PUT('petugas/status/{status}/id/{id}',[PetugasController::class,'update_status'])->name('petugas.update_status');
+
+    Route::get('titipan',[TitipanController::class,'index'])->name('titipan.index');
+    Route::resource('titipan',TitipanController::class);
+
+    Route::get('/file-import',[TitipanController::class,'importView'])->name('import-view');
+    Route::post('/import',[TitipanController::class,'import'])->name('import');
+    Route::get('/export-titipan',[TitipanController::class,'exportTitipan'])->name('export-titipan');
 });
 
 require __DIR__.'/auth.php';

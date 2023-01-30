@@ -7,13 +7,13 @@
     <title>{{ $title }}</title>
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
     <!-- Styles -->
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-d0f05521.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('public/build/assets/app-4af19b7a.css') }}">
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 
 <body class="antialiased">
-
     <nav class="bg-indigo-500 border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
             <a href="https://flowbite.com/" class="flex items-center">
@@ -41,7 +41,7 @@
                 <ul
                     class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-indigo-500 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-indigo-500 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="#"
+                        <a href="{{ url('/') }}"
                             class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-100 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
                     </li>
                     <li>
@@ -53,6 +53,10 @@
                             class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Wakalah</a>
                     </li>
                     <li>
+                        <a href="{{ route('titipan.index') }}"
+                            class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Titipan</a>
+                    </li>
+                    <li>
                         <a href="{{ route('petugas.index') }}"
                             class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Petugas</a>
                     </li>
@@ -60,10 +64,57 @@
                         <a href="{{ route('majelis.index') }}"
                             class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Majelis</a>
                     </li>
+                    <li>
+                        @if (Auth::check())
+                        <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown"
+                            data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer"
+                            src="{{ asset('user1.jpg') }}" alt="User dropdown">
+                        @else
+                        <a href="{{ route('login') }}"
+                            class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
+                        @endif
+
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    @if (Auth::check())
+
+
+    <!-- Dropdown menu -->
+    <div id="userDropdown"
+        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+            <div>{{ Auth::user()->name }}</div>
+            <div class="font-medium truncate">{{ Auth::user()->email }}</div>
+        </div>
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+            <li>
+                <a href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+            </li>
+            <li>
+                <a href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+            </li>
+            <li>
+                <a href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+            </li>
+        </ul>
+        <div class="py-1">
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                    out</button>
+            </form>
+        </div>
+    </div>
+    @endif
+
     <div class="w-full lg:w-[1200px] container mx-auto">
         @yield('konten')
     </div>

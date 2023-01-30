@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('item_name');
             $table->string('satuan');
+            $table->integer('stok')->default(0);
             $table->softDeletes();
         });
     }
