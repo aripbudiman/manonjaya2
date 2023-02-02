@@ -9,7 +9,7 @@
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('public/build/assets/app-4af19b7a.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/build/assets/app-e5a5c4bd.css') }}">
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 
@@ -49,12 +49,23 @@
                             class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-100 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">ATK</a>
                     </li>
                     <li>
-                        <a href="{{ route('wakalah.index') }}"
-                            class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Wakalah</a>
+                        <a href="{{ route('wakalah.index') }}" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent
+                        md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white
+                        dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Wakalah</a>
                     </li>
                     <li>
                         <a href="{{ route('titipan.index') }}"
                             class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Titipan</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('selisih_lebih.index') }}"
+                            class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Selisih
+                            Lebih</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('selisih_kurang.index') }}"
+                            class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Selisih
+                            Kurang</a>
                     </li>
                     <li>
                         <a href="{{ route('petugas.index') }}"
@@ -67,7 +78,7 @@
                     <li>
                         @if (Auth::check())
                         <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown"
-                            data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer"
+                            data-dropdown-placement="bottom-start" class="w-5 h-5 rounded-full cursor-pointer"
                             src="{{ asset('user1.jpg') }}" alt="User dropdown">
                         @else
                         <a href="{{ route('login') }}"

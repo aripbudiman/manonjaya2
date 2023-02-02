@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('atk', function (Blueprint $table) {
+        Schema::create('selisih_lebih', function (Blueprint $table) {
             $table->id();
-            $table->string('item_name');
-            $table->string('satuan');
-            $table->integer('stok')->default(0);
-            $table->integer('bobot')->default(0);
+            $table->string('trx_date');
+            $table->string('petugas');
+            $table->text('description');
+            $table->decimal('debet',15,0);
+            $table->decimal('kredit',15,0);
+            $table->enum('status',['approve','pending'])->default('pending');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('atk');
+        Schema::dropIfExists('selisih_lebih');
     }
 };

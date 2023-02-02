@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Majelis;
 use Illuminate\Http\Request;
-use App\Models\Petugas;
-use App\Models\Wakalah;
+use Illuminate\Routing\Controller;
+use App\Imports\ImportSelisihKurang;
+use App\Models\SelisihKurang;
+use Maatwebsite\Excel\Facades\Excel;
 
-class WakalahController extends Controller
+class SelisihKurangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,8 @@ class WakalahController extends Controller
      */
     public function index()
     {
-        $wakalah =Wakalah::all();
-        return view('wakalah.index',['title'=>'Wakalah'],compact('wakalah'));
+        $kurang=SelisihKurang::where('status','pending')->get();
+        return view('selisihkurang.index',['title'=>'Selisih Kurang'],compact('kurang'));
     }
 
     /**
@@ -27,9 +28,7 @@ class WakalahController extends Controller
      */
     public function create()
     {
-        $petugas =Petugas::where('status','!=','non aktif')->get();
-        $majelis=Majelis::all();
-        return view('wakalah.create',['title'=>'Create Wakalah'],compact('petugas','majelis'));
+        //
     }
 
     /**
@@ -40,23 +39,7 @@ class WakalahController extends Controller
      */
     public function store(Request $request)
     {
-        $trxDate=$request->trx_date;
-        $namaAnggota=$request->nama_anggota;
-        $majelis=$request->majelis;
-        $petugas=$request->petugas;
-        $nominal=$request->nominal;
-        for($i=0; $i<count($petugas);$i++){
-            $data =[
-                'petugas'=>$petugas[$i],
-                'nama_anggota'=>$namaAnggota[$i],
-                'majelis'=>$majelis[$i],
-                'nominal'=>str_replace('.','',$nominal[$i]),
-                'status'=>'OnProses',
-                'trx_wkl'=>$trxDate
-            ];
-            Wakalah::create($data);
-        }
-        return back()->with('success','Wakalah hasbeen successfuly');
+        //
     }
 
     /**
@@ -90,7 +73,10 @@ class WakalahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $titipan =SelisihKurang::findOrFail($id);
+        $titipan->status='approve';
+        $titipan->save();
+        return back();
     }
 
     /**
@@ -104,8 +90,8 @@ class WakalahController extends Controller
         //
     }
 
-    public function saldo_wakalah(){
-        return view('wakalah.saldo',['title'=>'Saldo Wakalah']);
+    public function import(Request $request){
+        Excel::import(new ImportSelisihKurang, $request->file('file')->store('files'));
+        return redirect()->back();
     }
-
 }
