@@ -45,10 +45,12 @@ class AtkController extends Controller
     {
         $item=$request->item_name;
         $satuan=$request->satuan;
+        $bobot=$request->bobot;
         for($i=0; $i<count($item);$i++){
             $data = [
                 'item_name'=>$item[$i],
-                'satuan'=>$satuan[$i]
+                'satuan'=>$satuan[$i],
+                'bobot'=>$bobot[$i]
             ];
             AlatTulisKantor::create($data);
         }
@@ -106,6 +108,7 @@ class AtkController extends Controller
             $item=AlatTulisKantor::findOrFail($id);
             $item->item_name=$request->item_name;
             $item->satuan=$request->satuan;
+            $item->bobot=$request->bobot;
             $item->save();
             return back();
     }

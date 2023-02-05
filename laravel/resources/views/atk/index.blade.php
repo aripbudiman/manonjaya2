@@ -30,7 +30,7 @@
     <div class="relative overflow-x-auto shadow-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
+                <tr class="text-center">
                     <th scope="col" class="px-6 py-3">
                         Items name
                     </th>
@@ -39,6 +39,12 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Stok
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Bobot
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Status
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -51,14 +57,28 @@
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $item->item_name }}
                     </th>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-center">
                         {{ $item->satuan }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-center">
                         {{ $item->stok }}
                     </td>
-                    <td class="px-6 py-4">
-                        <button onclick="edit(`{{$item->item_name}}`,`{{ $item->satuan }}`,`{{ $item->id }}`)"
+                    <td class="px-6 py-4 text-center">
+                        {{ $item->bobot }}
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        @if ($item->stok <= $item->bobot)
+                            <span
+                                class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">Sedikit
+                                Lagi</span>
+                            @else
+                            <span
+                                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Cukup</span>
+                            @endif
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <button
+                            onclick="edit(`{{$item->item_name}}`,`{{ $item->satuan }}`,`{{ $item->id }}`,`{{ $item->bobot }}`)"
                             class="edit-item font-medium text-indigo-600 dark:text-indigo-500 hover:underline">Edit</button>
                         <form action="{{ route('atk.destroy',$item->id) }}" method="POST" class="inline">
                             @csrf
@@ -111,6 +131,12 @@
                             <option value="roll">roll</option>
                         </select>
                     </div>
+                    <div>
+                        <label for="bobot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Bobot</label>
+                        <input type="text" name="bobot" id="bobot"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    </div>
                     <button type="submit"
                         class="w-full text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium  text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Update</button>
                 </form>
@@ -139,10 +165,11 @@
         }
     };
 
-    function edit(name, satuan, id) {
+    function edit(name, satuan, id, bobot) {
         const modal = new Modal($targetEl, options);
         $('#item_name').val(`${name}`);
         $('#id_item').val(`${id}`);
+        $('#bobot').val(`${bobot}`);
 
         modal.show()
     }

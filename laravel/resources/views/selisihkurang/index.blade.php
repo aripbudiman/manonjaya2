@@ -1,7 +1,7 @@
 @extends('layouts.manonjaya')
 @section('konten')
 @if (Auth::user()->role =='admin')
-@include('selisihlebih.modal_import')
+@include('selisihkurang.modal_import')
 @endif
 
 <div class="relative my-10 overflow-x-auto shadow-md sm:rounded-lg">

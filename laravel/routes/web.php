@@ -59,6 +59,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('baranghilang/{barangHilang}',[AtkController::class,'destroyBarangHilang'])->name('baranghilang.destroy');
 
     Route::resource('wakalah',WakalahController::class);
+    Route::put('wakalah/status/{status}/id/{id}',[WakalahController::class,'status'])->name('wakalah.status');
+    Route::put('wakalah/id/{id}/edit',[WakalahController::class,'edit_wkl'])->name('wakalah.edit_wkl');
+    Route::get('cetak_pdf/{dari}/{sampai}/{status}',[WakalahController::class,'cetak_pdf'])->name('wakalah.pdf');
+    Route::get('cetak_wakalah_xlsx/{dari}/{sampai}/{status}',[WakalahController::class,'cetak_xlsx'])->name('wakalah.xlsx');
+    Route::get('saldo_wakalah',[WakalahController::class,'saldo_wakalah'])->name('saldo');
+    Route::post('saldo_wakalah',[WakalahController::class,'saldo_wakalah'])->name('saldo');
+    Route::get('list_saldo_wakalah',[WakalahController::class,'list_saldo_wakalah'])->name('list_saldo_wakalah');
+    Route::post('list_saldo_wakalah',[WakalahController::class,'list_saldo_wakalah'])->name('list_saldo_wakalah');
+    Route::get('list_saldo_wakalah/{dari}/{sampai}/{status}',[WakalahController::class,'list_saldo_pdf'])->name('list_saldo_pdf');
+    Route::get('list_saldo_wakalah_xlsx/{dari}/{sampai}/{status}',[WakalahController::class,'list_saldo_xlsx'])->name('list_saldo_xlsx');
     
     Route::resource('petugas',PetugasController::class);
     Route::resource('majelis',MajelisController::class);
@@ -71,8 +81,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/import',[TitipanController::class,'import'])->name('import');
     Route::post('/import_selisih_lebih',[SelisihLebihController::class,'import'])->name('import.lebih');
     Route::post('/import_selisih_kurang',[SelisihKurangController::class,'import'])->name('import.kurang');
-    Route::get('saldo_wakalah',[WakalahController::class,'saldo_wakalah'])->name('saldo');
-
     Route::resource('selisih_lebih',SelisihLebihController::class);
     Route::resource('selisih_kurang',SelisihKurangController::class);
 });

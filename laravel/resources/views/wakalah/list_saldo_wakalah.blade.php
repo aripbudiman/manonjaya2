@@ -1,6 +1,6 @@
 @extends('layouts.manonjaya')
 @section('konten')
-<form action="{{ route('saldo') }}" method="post" class="lg:w-72">
+<form action="{{ route('list_saldo_wakalah') }}" method="post" class="lg:w-72">
     @csrf
     <select id="status" name="status"
         class="bg-gray-50 max-w-sm mt-10 mb-5 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -35,22 +35,56 @@
     <table class="w-full text-sm border text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-emerald-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    Nama Petugas
+                <th scope="col" class="px-2 py-3 text-center">
+                    no
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Nominal
+                <th scope="col" class="px-2 py-3">
+                    tgl wakalah
+                </th>
+                <th scope="col" class="px-2 py-3">
+                    Petugas
+                </th>
+                <th scope="col" class="px-2 py-3">
+                    nama anggota
+                </th>
+                <th scope="col" class="px-2 py-3">
+                    majelis
+                </th>
+                <th scope="col" class="px-2 py-3">
+                    Status
+                </th>
+                <th scope="col" class="px-2 py-3">
+                    nominal
                 </th>
             </tr>
         </thead>
         <tbody id="load-data">
+            @php
+            $no=1;
+            @endphp
             @foreach ($wakalah as $item)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $item->petugas }}
+                <th scope="row"
+                    class="px-2 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ $no++ }}
                 </th>
-                <td class="px-6 py-4">
-                    Rp {{ number_format($item->total,0,',','.') }}
+                <td class="px-2 py-4">
+                    {{ $item->trx_wkl }}
+                </td>
+                <td class="px-2 py-4">
+                    {{ $item->petugas }}
+                </td>
+                <td class="px-2 py-4">
+                    {{ $item->nama_anggota }}
+                </td>
+                <td class="px-2 py-4">
+                    {{ $item->majelis }}
+                </td>
+                <td class="px-2 py-4">
+                    {{ $item->status }}
+                </td>
+                <td class="px-2 py-4">
+                    {{ number_format($item->nominal,0,',','.') }}
                 </td>
             </tr>
             @endforeach
@@ -67,7 +101,7 @@
             const dari = $('#dari').val();
             const sampai = $('#sampai').val();
             const status = $('#status').val();
-            window.open(`cetak_pdf/${dari}/${sampai}/${status}`, '_blank');
+            window.open(`list_saldo_wakalah/${dari}/${sampai}/${status}`, '_blank');
         });
 
         $('#excel').click(function (e) {
@@ -75,7 +109,7 @@
             const dari = $('#dari').val();
             const sampai = $('#sampai').val();
             const status = $('#status').val();
-            window.open(`cetak_wakalah_xlsx/${dari}/${sampai}/${status}`, '_blank');
+            window.open(`list_saldo_wakalah_xlsx/${dari}/${sampai}/${status}`, '_blank');
         });
     });
 

@@ -37,7 +37,7 @@
         <div
             class="flex flex-row m-auto bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 p-6 gap-8 rounded-lg border-2 border-teal-500">
             <div class="my-auto">
-                <div class="text-lg text-teal-300">Downloads</div>
+                <div class="text-lg text-teal-300">Selisih Lebih</div>
                 <div class="text-4xl text-teal-100">622k</div>
             </div>
             <div class="text-teal-300 my-auto bg-gradient-to-l from-teal-700 via-teal-800 to-teal-900 rounded-full p-4">
@@ -49,7 +49,7 @@
         <div
             class="flex flex-row m-auto bg-gradient-to-r from-stone-700 via-stone-800 to-stone-900 p-6 gap-8 rounded-lg border-2 border-stone-500">
             <div class="my-auto">
-                <div class="text-lg text-stone-300">Downloads</div>
+                <div class="text-lg text-stone-300">Selisih Kurang</div>
                 <div class="text-4xl text-stone-100">622k</div>
             </div>
             <div
@@ -107,6 +107,58 @@
                         </p>
                     </div>
                     <div class="inline-flex items-center text-base font-semibold text-indigo-300 dark:text-white">
+                        Rp {{ number_format($item->nominal,0,',','.') }}
+                    </div>
+                </div>
+            </li>
+            @endforeach
+        </ul>
+        <ul
+            class=" divide-y divide-gray-200 rounded-lg dark:divide-gray-700 border-2 border-teal-500 p-5 bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900">
+            <h1 class="text-4xl text-center text-teal-300 font-love">Saldo Wakalah</h1>
+            @foreach ($listwkl as $item)
+            <li class="pb-3 sm:pb-4">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-person-circle text-teal-300" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0 items-center">
+                        <p class="text-sm font-medium text-teal-200 truncate dark:text-white">
+                            {{ $item->petugas }}
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-teal-300 dark:text-white">
+                        Rp {{ number_format($item->nominal,0,',','.') }}
+                    </div>
+                </div>
+            </li>
+            @endforeach
+        </ul>
+        <ul
+            class=" divide-y divide-gray-200 rounded-lg dark:divide-gray-700 border-2 border-stone-500 p-5 bg-gradient-to-r from-stone-700 via-stone-800 to-stone-900">
+            <h1 class="text-4xl text-center text-stone-300 font-love">Saldo Wakalah</h1>
+            @foreach ($listwkl as $item)
+            <li class="pb-3 sm:pb-4">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-person-circle text-stone-300" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0 items-center">
+                        <p class="text-sm font-medium text-stone-200 truncate dark:text-white">
+                            {{ $item->petugas }}
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-stone-300 dark:text-white">
                         Rp {{ number_format($item->nominal,0,',','.') }}
                     </div>
                 </div>

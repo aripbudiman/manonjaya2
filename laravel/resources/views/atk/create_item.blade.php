@@ -16,6 +16,9 @@
                         <th scope="col" class="px-6 py-3">
                             Satuan
                         </th>
+                        <th scope="col" class="px-6 py-3 w-48">
+                            Bobot
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             <button class="text-indigo-600">Action</button>
                         </th>
@@ -39,6 +42,10 @@
                                 <option value="stick">stick</option>
                                 <option value="roll">roll</option>
                             </select>
+                        </td>
+                        <td class="px-6 py-4">
+                            <input type="text" id="bobot" name="bobot[]"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </td>
                         <td class="px-6 py-4 text-center">
                             <button type="button"
@@ -83,6 +90,10 @@
                                 <option value="roll">roll</option>
                         </select>
                     </td>
+                    <td class="px-6 py-4">
+                            <input type="text" id="bobot" name="bobot[]"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </td>
                     <td class="px-6 py-4 text-center">
                         <button type="button" class="delete font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                     </td>

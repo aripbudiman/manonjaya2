@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SelisihKurang extends Model
 {
     use HasFactory,SoftDeletes;
+    
     public $table='selisih_kurang';
     protected $guarded=[];
 }
