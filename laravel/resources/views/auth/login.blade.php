@@ -7,10 +7,10 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="name" :value="__('Email')" />
-            <x-text-input id="name" class="block mt-1 w-full py-2 px-3 outline focus:outline-indigo-500" type="name"
-                name="name" :value="old('name')" required autofocus />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full py-2 px-3 outline focus:outline-indigo-500" type="email"
+                name="email" :value="old('email')" required autofocus />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
