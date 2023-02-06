@@ -10,7 +10,7 @@
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('public/build/assets/app-e5a5c4bd.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/build/assets/app-dc029b2f.css') }}">
     @vite(['resources/css/app.css','resources/js/app.js'])
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
 </head>
