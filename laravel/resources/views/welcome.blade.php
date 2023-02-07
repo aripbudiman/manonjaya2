@@ -38,7 +38,8 @@
             class="flex flex-row m-auto bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 p-6 gap-8 rounded-lg border-2 border-teal-500">
             <div class="my-auto">
                 <div class="text-lg text-teal-300">Selisih Lebih</div>
-                <div class="text-4xl text-teal-100">622k</div>
+                <div class="text-xl text-teal-100">{{ number_format($saldoSelisihLebih[0]->nominal, 0, ',', '.') }}
+                </div>
             </div>
             <div class="text-teal-300 my-auto bg-gradient-to-l from-teal-700 via-teal-800 to-teal-900 rounded-full p-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 20 20" fill="currentColor">
@@ -50,7 +51,8 @@
             class="flex flex-row m-auto bg-gradient-to-r from-stone-700 via-stone-800 to-stone-900 p-6 gap-8 rounded-lg border-2 border-stone-500">
             <div class="my-auto">
                 <div class="text-lg text-stone-300">Selisih Kurang</div>
-                <div class="text-4xl text-stone-100">622k</div>
+                <div class="text-xl text-stone-100">{{ number_format($saldoSelisihKurang[0]->nominal, 0, ',', '.') }}
+                </div>
             </div>
             <div
                 class="text-stone-300 my-auto bg-gradient-to-l from-stone-700 via-stone-800 to-stone-900 rounded-full p-4">
@@ -116,7 +118,7 @@
         <ul
             class=" divide-y divide-gray-200 rounded-lg dark:divide-gray-700 border-2 border-teal-500 p-5 bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900">
             <h1 class="text-4xl text-center text-teal-300 font-love">Saldo Wakalah</h1>
-            @foreach ($listwkl as $item)
+            @foreach ($listSelisihKurang as $item)
             <li class="pb-3 sm:pb-4">
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0 items-center">
@@ -141,8 +143,8 @@
         </ul>
         <ul
             class=" divide-y divide-gray-200 rounded-lg dark:divide-gray-700 border-2 border-stone-500 p-5 bg-gradient-to-r from-stone-700 via-stone-800 to-stone-900">
-            <h1 class="text-4xl text-center text-stone-300 font-love">Saldo Wakalah</h1>
-            @foreach ($listwkl as $item)
+            <h1 class="text-4xl text-center text-teal-300 font-love">Saldo Selisih Lebih</h1>
+            @foreach ($listSelisihLebih as $item)
             <li class="pb-3 sm:pb-4">
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0 items-center">

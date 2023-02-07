@@ -27,9 +27,13 @@ Route::get('/', function () {
     $titipan=DB::table('titipan')->selectRaw('sum(kredit) as nominal')->where('status','not_taken')->get();
     $titipans=DB::table('titipan')->selectRaw('sum(kredit) as nominal, petugas')->where('status','not_taken')->groupBy('petugas')->get();
     $listwkl=DB::table('wakalah')->selectRaw('sum(nominal) as nominal, petugas')->where('status','OnProses')->groupBy('petugas')->get();
+    $saldoSelisihLebih=DB::table('selisih_lebih')->selectRaw('sum(kredit) as nominal')->where('status','pending')->get();
+    $listSelisihLebih=DB::table('selisih_lebih')->selectRaw('sum(kredit) as nominal, petugas')->where('status','pending')->groupBy('petugas')->get();
+    $saldoSelisihKurang=DB::table('selisih_kurang')->selectRaw('sum(debet) as nominal')->where('status','pending')->get();
+    $listSelisihKurang=DB::table('selisih_kurang')->selectRaw('sum(debet) as nominal, petugas')->where('status','pending')->groupBy('petugas')->get();
     // return$listwkl;
 
-    return view('welcome',['title'=>'Manonjaya.app'],compact('wakalah','titipan','titipans','listwkl'));
+    return view('welcome',['title'=>'Manonjaya.app'],compact('wakalah','titipan','titipans','listwkl','saldoSelisihLebih','listSelisihLebih','saldoSelisihKurang','listSelisihKurang'));
 });
 
 Route::get('/dashboard', function () {
