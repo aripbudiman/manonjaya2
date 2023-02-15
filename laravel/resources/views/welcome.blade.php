@@ -117,8 +117,8 @@
         </ul>
         <ul
             class=" divide-y divide-gray-200 rounded-lg dark:divide-gray-700 border-2 border-teal-500 p-5 bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900">
-            <h1 class="text-4xl text-center text-teal-300 font-love">Saldo Wakalah</h1>
-            @foreach ($listSelisihKurang as $item)
+            <h1 class="text-4xl text-center text-teal-300 font-love">Saldo Selisih Lebih</h1>
+            @foreach ($listSelisihLebih as $item)
             <li class="pb-3 sm:pb-4">
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0 items-center">
@@ -143,8 +143,8 @@
         </ul>
         <ul
             class=" divide-y divide-gray-200 rounded-lg dark:divide-gray-700 border-2 border-stone-500 p-5 bg-gradient-to-r from-stone-700 via-stone-800 to-stone-900">
-            <h1 class="text-4xl text-center text-teal-300 font-love">Saldo Selisih Lebih</h1>
-            @foreach ($listSelisihLebih as $item)
+            <h1 class="text-4xl text-center text-stone-300 font-love">Saldo Selisih Kurang</h1>
+            @foreach ($listSelisihKurang as $item)
             <li class="pb-3 sm:pb-4">
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0 items-center">
