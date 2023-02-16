@@ -21,7 +21,7 @@ class WakalahController extends Controller
      */
     public function index()
     {
-        $wakalah =Wakalah::all();
+        $wakalah =Wakalah::where('status','OnProses')->get();
         $petugas =Petugas::where('status','!=','non aktif')->get();
         $majelis=Majelis::all();
         // return $wakalah;

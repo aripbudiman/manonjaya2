@@ -76,12 +76,12 @@
                                 <li>
                                     <a href="{{ route('saldo') }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">List
-                                        Saldo Wakalah</a>
+                                        Saldo Wakalah Petugas</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('list_saldo_wakalah') }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">List
-                                        Saldo Wakalah Petugas</a>
+                                        Saldo Wakalah Anggota</a>
                                 </li>
                             </ul>
                         </div>

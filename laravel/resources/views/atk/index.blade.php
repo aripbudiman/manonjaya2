@@ -27,9 +27,10 @@
         </button>
     </div>
     @endif
-    <div class="relative overflow-x-auto shadow-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div class="relative overflow-x-auto">
+        <table class="w-full table-auto text-sm text-left cell-border text-gray-500 dark:text-gray-400" id="table-atk">
+            <thead
+                class="text-xs text-center text-gray-700 uppercase bg-emerald-100 dark:bg-gray-700 dark:text-gray-400">
                 <tr class="text-center">
                     <th scope="col" class="px-6 py-3">
                         Items name
@@ -53,7 +54,7 @@
             </thead>
             <tbody>
                 @foreach ($items as $item)
-                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-emerald-50">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $item->item_name }}
                     </th>
@@ -181,6 +182,17 @@
             // modal.hide()
             $('#modal-edit-item').addClass('hidden')
         });
+
+        $('#table-atk').DataTable({
+            "lengthMenu": [
+                [10, 5, 25, 50, -1],
+                [10, 5, 25, 50, "All"]
+            ]
+        });
+        $('#table-atk_filter').addClass('mb-4');
+        $('#table-atk_info').addClass('mt-5 mb-20');
+        $('#table-atk_paginate').addClass('mt-5 mb-20');
+        $('select[name="table-atk_length"]').addClass('w-14');
     });
 
 </script>
