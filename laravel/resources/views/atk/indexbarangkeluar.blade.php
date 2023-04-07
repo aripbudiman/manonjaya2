@@ -1,7 +1,11 @@
 @extends('layouts.manonjaya')
 @section('konten')
+
 <div class="_table_barang_keluar">
     @include('atk.groupbutton')
+    <div>
+        <h1>Filter Tanggal</h1>
+    </div>
     <div class="relative overflow-x-auto">
         <table class="w-full table-auto text-sm text-left cell-border text-gray-500 dark:text-gray-400"
             id="table-atk-keluar">

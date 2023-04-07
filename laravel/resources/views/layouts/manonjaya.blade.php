@@ -83,6 +83,12 @@
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">List
                                         Saldo Wakalah Anggota</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('sp3') }}"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">List
+                                        SP3
+                                        Belum Masuk</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

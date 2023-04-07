@@ -10,6 +10,7 @@ use App\Models\BarangMasuk;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class AtkController extends Controller
 {
@@ -114,7 +115,7 @@ class AtkController extends Controller
     }
 
     public function indexBarangMasuk(){
-        $barangmasuk = BarangMasuk::with('items')->get();
+        $barangmasuk = BarangMasuk::with('items')->whereBetween('trx_date',[date('Y-m-1'),date('Y-m-t')])->get();
         
         return view('atk.indexbarangmasuk',['title'=>'Barang Masuk'],compact('barangmasuk'));
     }
@@ -147,7 +148,8 @@ class AtkController extends Controller
     }
 
     public function indexBarangKeluar(){
-        $barangkeluar = BarangKeluar::with('items')->get();
+        $filter1WeekAgo = Carbon::now()->subWeek();
+        $barangkeluar = BarangKeluar::with('items')->whereBetween('trx_date',[date('Y-m-1'),date('Y-m-t')])->get();
         return view('atk.indexbarangkeluar',['title'=>'Barang Keluar'],compact('barangkeluar'));
     }
 

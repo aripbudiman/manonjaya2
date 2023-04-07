@@ -8,6 +8,7 @@ use App\Http\Controllers\SelisihKurangController;
 use App\Http\Controllers\SelisihLebihController;
 use App\Http\Controllers\TitipanController;
 use App\Http\Controllers\WakalahController;
+use App\Http\Controllers\Sp3Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -87,6 +88,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/import_selisih_kurang',[SelisihKurangController::class,'import'])->name('import.kurang');
     Route::resource('selisih_lebih',SelisihLebihController::class);
     Route::resource('selisih_kurang',SelisihKurangController::class);
+
+    Route::get('sp3',[Sp3Controller::class,'index'])->name('sp3');
+    Route::post('sp3/id/{id}',[Sp3Controller::class,'belum_masuk'])->name('sp3.belum_masuk');
+    Route::PUT('sp3/{status}',[Sp3Controller::class,'edit'])->name('sp3.edit');
 });
 
 require __DIR__.'/auth.php';
