@@ -11,6 +11,7 @@ use App\Models\Petugas;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use PDF;
 
 class AtkController extends Controller
 {
@@ -21,9 +22,9 @@ class AtkController extends Controller
      */
     public function index()
     {
-        $items =AlatTulisKantor::with(['barangmasuk'])->withCount('barangmasuk')->get();
+        $items = AlatTulisKantor::with(['barangmasuk'])->withCount('barangmasuk')->get();
         // return $items;
-        return view('atk.index',['title'=>'Alat Tulis Kantor'],compact('items'));
+        return view('atk.index', ['title' => 'Alat Tulis Kantor'], compact('items'));
     }
 
     /**
@@ -33,7 +34,7 @@ class AtkController extends Controller
      */
     public function create()
     {
-        return view('atk.create_item',['title'=>'Create Items']);
+        return view('atk.create_item', ['title' => 'Create Items']);
     }
 
     /**
@@ -44,18 +45,18 @@ class AtkController extends Controller
      */
     public function store(Request $request)
     {
-        $item=$request->item_name;
-        $satuan=$request->satuan;
-        $bobot=$request->bobot;
-        for($i=0; $i<count($item);$i++){
+        $item = $request->item_name;
+        $satuan = $request->satuan;
+        $bobot = $request->bobot;
+        for ($i = 0; $i < count($item); $i++) {
             $data = [
-                'item_name'=>$item[$i],
-                'satuan'=>$satuan[$i],
-                'bobot'=>$bobot[$i]
+                'item_name' => $item[$i],
+                'satuan' => $satuan[$i],
+                'bobot' => $bobot[$i]
             ];
             AlatTulisKantor::create($data);
         }
-        return redirect()->route('atk.index')->with('success','Item hasbeen succesfully');
+        return redirect()->route('atk.index')->with('success', 'Item hasbeen succesfully');
     }
 
     /**
@@ -104,114 +105,140 @@ class AtkController extends Controller
         return back();
     }
 
-    public function update_item(Request $request){
-            $id =$request->id;
-            $item=AlatTulisKantor::findOrFail($id);
-            $item->item_name=$request->item_name;
-            $item->satuan=$request->satuan;
-            $item->bobot=$request->bobot;
-            $item->save();
-            return back();
+    public function update_item(Request $request)
+    {
+        $id = $request->id;
+        $item = AlatTulisKantor::findOrFail($id);
+        $item->item_name = $request->item_name;
+        $item->satuan = $request->satuan;
+        $item->bobot = $request->bobot;
+        $item->save();
+        return back();
     }
 
-    public function indexBarangMasuk(){
-        $barangmasuk = BarangMasuk::with('items')->whereBetween('trx_date',[date('Y-m-1'),date('Y-m-t')])->get();
-        
-        return view('atk.indexbarangmasuk',['title'=>'Barang Masuk'],compact('barangmasuk'));
+    public function indexBarangMasuk()
+    {
+        $barangmasuk = BarangMasuk::with('items')->whereBetween('trx_date', [date('Y-m-1'), date('Y-m-t')])->get();
+
+        return view('atk.indexbarangmasuk', ['title' => 'Barang Masuk'], compact('barangmasuk'));
     }
 
-    public function createBarangMasuk(){
-        $items =AlatTulisKantor::all();
-        return view('atk.createbarangmasuk',['title'=>'Create Barang Masuk'],compact('items'));
+    public function createBarangMasuk()
+    {
+        $items = AlatTulisKantor::all();
+        return view('atk.createbarangmasuk', ['title' => 'Create Barang Masuk'], compact('items'));
     }
 
-    public function storeBarangMasuk(Request $request){
-        $date =$request->trx_date;
-        $newdate=str_replace('/','-',$date);
-        
-        $item_id=$request->item_id;
-        $qty=$request->qty;
-        for($i=0; $i<count($item_id);$i++){
+    public function storeBarangMasuk(Request $request)
+    {
+        $date = $request->trx_date;
+        $newdate = str_replace('/', '-', $date);
+
+        $item_id = $request->item_id;
+        $qty = $request->qty;
+        for ($i = 0; $i < count($item_id); $i++) {
             $data = [
-                'trx_date'=>$newdate,
-                'item_id'=>$item_id[$i],
-                'qty'=>$qty[$i]
+                'trx_date' => $newdate,
+                'item_id' => $item_id[$i],
+                'qty' => $qty[$i]
             ];
             BarangMasuk::create($data);
         }
-        return redirect()->route('barangmasuk')->with('success','Item hasbeen succesfully');
+        return redirect()->route('barangmasuk')->with('success', 'Item hasbeen succesfully');
     }
 
-    public function destroyBarangMasuk(BarangMasuk $barangMasuk){
+    public function destroyBarangMasuk(BarangMasuk $barangMasuk)
+    {
         $barangMasuk->delete();
         return back();
     }
 
-    public function indexBarangKeluar(){
+    public function indexBarangKeluar()
+    {
         $filter1WeekAgo = Carbon::now()->subWeek();
-        $barangkeluar = BarangKeluar::with('items')->whereBetween('trx_date',[date('Y-m-1'),date('Y-m-t')])->get();
-        return view('atk.indexbarangkeluar',['title'=>'Barang Keluar'],compact('barangkeluar'));
+        $barangkeluar = BarangKeluar::with('items')->whereBetween('trx_date', [date('Y-m-1'), date('Y-m-t')])->get();
+        return view('atk.indexbarangkeluar', ['title' => 'Barang Keluar'], compact('barangkeluar'));
     }
 
-    public function createBarangKeluar(){
-        $items =AlatTulisKantor::all();
-        $petugas =Petugas::where('status','!=','non aktif')->get();
-        return view('atk.createbarangkeluar',['title'=>'Create Barang Keluar'],compact('items','petugas'));
+    public function createBarangKeluar()
+    {
+        $items = AlatTulisKantor::all();
+        $petugas = Petugas::where('status', '!=', 'non aktif')->get();
+        return view('atk.createbarangkeluar', ['title' => 'Create Barang Keluar'], compact('items', 'petugas'));
     }
 
-    public function storeBarangKeluar(Request $request){
-        $date =$request->trx_date;
-        $newdate=str_replace('/','-',$date);
-        
-        $item_id=$request->item_id;
-        $petugas=$request->petugas;
-        $qty=$request->qty;
-        for($i=0; $i<count($item_id);$i++){
+    public function storeBarangKeluar(Request $request)
+    {
+        $date = $request->trx_date;
+        $newdate = str_replace('/', '-', $date);
+
+        $item_id = $request->item_id;
+        $petugas = $request->petugas;
+        $qty = $request->qty;
+        for ($i = 0; $i < count($item_id); $i++) {
             $data = [
-                'trx_date'=>$newdate,
-                'item_id'=>$item_id[$i],
-                'petugas'=>$petugas[$i],
-                'qty'=>$qty[$i]
+                'trx_date' => $newdate,
+                'item_id' => $item_id[$i],
+                'petugas' => $petugas[$i],
+                'qty' => $qty[$i]
             ];
             BarangKeluar::create($data);
         }
-        return redirect()->route('barangkeluar')->with('success','Item hasbeen succesfully');
+        return redirect()->route('barangkeluar')->with('success', 'Item hasbeen succesfully');
     }
 
-    public function destroyBarangKeluar(BarangKeluar $barangKeluar){
+    public function destroyBarangKeluar(BarangKeluar $barangKeluar)
+    {
         $barangKeluar->delete();
         return back();
     }
 
-    public function indexBarangHilang(){
+    public function indexBarangHilang()
+    {
         $baranghilang = BarangHilang::with('items')->get();
-        return view('atk.indexbaranghilang',['title'=>'Barang Hilang'],compact('baranghilang'));
+        return view('atk.indexbaranghilang', ['title' => 'Barang Hilang'], compact('baranghilang'));
     }
 
-    public function createBarangHilang(){
-        $items =AlatTulisKantor::all();
-        return view('atk.createbaranghilang',['title'=>'Create Barang Hilang'],compact('items'));
+    public function createBarangHilang()
+    {
+        $items = AlatTulisKantor::all();
+        return view('atk.createbaranghilang', ['title' => 'Create Barang Hilang'], compact('items'));
     }
 
-    public function storeBarangHilang(Request $request){
-        $date =$request->trx_date;
-        $newdate=str_replace('/','-',$date);
-        
-        $item_id=$request->item_id;
-        $qty=$request->qty;
-        for($i=0; $i<count($item_id);$i++){
+    public function storeBarangHilang(Request $request)
+    {
+        $date = $request->trx_date;
+        $newdate = str_replace('/', '-', $date);
+
+        $item_id = $request->item_id;
+        $qty = $request->qty;
+        for ($i = 0; $i < count($item_id); $i++) {
             $data = [
-                'trx_date'=>$newdate,
-                'item_id'=>$item_id[$i],
-                'qty'=>$qty[$i]
+                'trx_date' => $newdate,
+                'item_id' => $item_id[$i],
+                'qty' => $qty[$i]
             ];
             BarangHilang::create($data);
         }
-        return redirect()->route('baranghilang')->with('success','Item hasbeen succesfully');
+        return redirect()->route('baranghilang')->with('success', 'Item hasbeen succesfully');
     }
 
-    public function destroyBarangHilang(BarangHilang $barangHilang){
+    public function destroyBarangHilang(BarangHilang $barangHilang)
+    {
         $barangHilang->delete();
         return back();
+    }
+
+    public function exportStokPdf()
+    {
+        $data = [
+            'title' => 'Contoh Export PDF menggunakan Dompdf di Laravel',
+            'content' => 'Ini adalah contoh hasil export PDF menggunakan Dompdf di Laravel'
+        ];
+        $title = 'Stok ATK cabang manonjaya tanggal' . date('l,d F Y');
+        $data = AlatTulisKantor::all();
+        // return $data;
+        $pdf = PDF::loadView('pdf', ['data' => $data, 'title' => $title]);
+        return $pdf->stream(date('d') . '.' . $title . '.pdf', ['Attachment' => false]);
     }
 }

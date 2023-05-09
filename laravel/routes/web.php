@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/export_stok_pdf',[AtkController::class,'exportStokPdf'])->name('export_stok_pdf');
 
     Route::resource('atk',AtkController::class);
     Route::post('atk/updated_item',[AtkController::class,'update_item'])->name('update.item');
