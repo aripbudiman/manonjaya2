@@ -1,6 +1,10 @@
 @extends('layouts.manonjaya')
 @section('konten')
 <div class="relative my-10 overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="mb-3">
+        <a target="_blank" href="{{ route('sp3.pdf') }}"
+            class="bg-blue-500 hover:bg-blue-700 text-white inline-block font-bold py-2 px-4 rounded">PDF</a>
+    </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class=" text-gray-700 uppercase bg-indigo-200 dark:bg-gray-700 dark:text-gray-400">
             <tr class="text-center">

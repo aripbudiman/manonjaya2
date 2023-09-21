@@ -4,7 +4,7 @@ use App\Http\Controllers\api\PetugasController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Sp3Controller;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('user',[UserController::class,'index']);
 Route::post('petugas/store',[PetugasController::class,'store']);
 Route::post('petugas/{id}',[PetugasController::class,'update']);
+
+Route::get('sp3',[Sp3Controller::class,'getSp3']);

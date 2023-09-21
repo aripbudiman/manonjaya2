@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Sp3;
+use PDF;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Routing\Controller;
 use Illuminate\Validation\Validator;
 
 class Sp3Controller extends Controller
@@ -42,5 +44,16 @@ class Sp3Controller extends Controller
         $sp3->status='masuk';
         $sp3->save();
         return back();
+    }
+
+    public function cetak_pdf_sp3(){
+        $sp3 =Sp3::with('wakalah')->where('status','belum masuk')->get();
+        $pdf = PDF::loadView('sp3.cetak_pdf_sp3',compact('sp3'));
+        return $pdf->stream('sp3_belum_masuk.pdf');
+    }
+
+    public function getSp3(){
+        $sp3 =Sp3::with('wakalah')->where('status','belum masuk')->get();
+       return response()->json($sp3);
     }
 }

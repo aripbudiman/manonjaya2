@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
     Route::get('sp3',[Sp3Controller::class,'index'])->name('sp3');
     Route::post('sp3/id/{id}',[Sp3Controller::class,'belum_masuk'])->name('sp3.belum_masuk');
     Route::PUT('sp3/{status}',[Sp3Controller::class,'edit'])->name('sp3.edit');
+    Route::get('/cetak_pdf_sp3',[Sp3Controller::class,'cetak_pdf_sp3'])->name('sp3.pdf');
 });
 
 require __DIR__.'/auth.php';
